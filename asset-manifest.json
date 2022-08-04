@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/op.gg-lol-stats/static/css/main.be97a4b4.css",
+    "main.js": "/op.gg-lol-stats/static/js/main.f1005646.js",
+    "index.html": "/op.gg-lol-stats/index.html",
+    "main.be97a4b4.css.map": "/op.gg-lol-stats/static/css/main.be97a4b4.css.map",
+    "main.f1005646.js.map": "/op.gg-lol-stats/static/js/main.f1005646.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.be97a4b4.css",
+    "static/js/main.f1005646.js"
+  ]
+}
