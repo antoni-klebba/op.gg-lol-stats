@@ -127,7 +127,7 @@ function App() {
         <h1>OP.GG Stats Calculator</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="data">Paste your games:</label>
-          <textarea value={value} onChange={handleChange} />
+          <textarea value={value} onChange={handleChange} spellcheck="false" />
           <div className="form-buttons-container">
             <button type="button" onClick={reset}>
               Reset

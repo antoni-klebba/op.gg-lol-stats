@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto:wght@300;500;700&display=swap");
 
 * {
   margin: 0;
@@ -88,6 +88,14 @@ textarea {
   max-height: 450px;
   min-height: 100px;
   min-width: 200px;
+  background-color: #fff6;
+  outline: none;
+  border: none;
+  font-family: "Inconsolata", monospace;
+  color: black;
+  padding: 15px;
+  box-shadow: 0 0 10px 0px black;
+  text-decoration: none;
 }
 
 .form-buttons-container {
@@ -109,7 +117,7 @@ textarea {
   display: flex;
   flex-direction: column;
   padding: 30px;
-  background-color: rgba(40, 52, 78, 0.903);
+  background-color: rgba(40, 52, 78, 0.809);
   border: 1px solid black;
   color: white;
 
