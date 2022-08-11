@@ -16,6 +16,7 @@
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .content {
@@ -82,7 +83,11 @@ button:active {
 
 textarea {
   width: 100%;
+  max-width: 800px;
   height: 20vh;
+  max-height: 450px;
+  min-height: 100px;
+  min-width: 200px;
 }
 
 .form-buttons-container {
