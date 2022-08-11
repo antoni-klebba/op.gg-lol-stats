@@ -16,9 +16,8 @@
 }
 
 .content {
-  height: 100%;
   width: 60%;
-  margin-top: 10%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +28,7 @@ main {
 }
 
 h1 {
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 
@@ -112,4 +112,25 @@ textarea {
 .mvp-adno {
   margin-top: 10px;
   font-size: 0.7em;
+}
+
+#show-instruction {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-size: 1.8em;
+  color: white;
+  background-color: rgb(83, 131, 232);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+}
+
+#show-instruction::after {
+  content: "?";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

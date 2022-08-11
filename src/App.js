@@ -6,6 +6,8 @@ import { gamesData } from "./Data/data.js";
 import { testData } from "./Data/testdata.js";
 
 import { calculateStats } from "./calculateStats.js";
+
+import Instruction from "./Components/Instruction/Instruction";
 import SelectStats from "./Components/SelectStats/SelectStats";
 import GeneralStats from "./Components/GeneralStats/GeneralStats.jsx";
 import KDAStats from "./Components/KDAStats/KDAStats";
@@ -51,6 +53,7 @@ function App() {
     shortestGame: "",
     longestGame: "",
   });
+  const [showInstruction, setShowInstruction] = useState(true);
 
   const {
     victories,
@@ -113,6 +116,8 @@ function App() {
 
   return (
     <div className="app">
+      <button id="show-instruction" onClick={() => setShowInstruction(true)}></button>
+      {showInstruction && <Instruction setShowInstruction={setShowInstruction} />}
       <div className="content">
         <h1>OP.GG Stats Calculator</h1>
         <form onSubmit={handleSubmit}>
