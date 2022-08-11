@@ -3,8 +3,7 @@ import "./GeneralStats.scss";
 const GeneralStats = ({ props }) => {
   const { victories, defeats, remakes, games, winratio, creepScore, CSPerMinute } = props;
   return (
-    <div>
-      <h2>General stats:</h2>
+    <div className="stats-container">
       <ul>
         <li>
           Victories: <span>{victories}</span>

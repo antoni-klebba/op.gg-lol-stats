@@ -1,3 +1,11 @@
 div {
   display: flex;
 }
+
+.select-stats {
+  width: 100%;
+  margin-top: 10vh;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10px;
+}

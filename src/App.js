@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./App.css";
+import "./App.scss";
 
 import { gamesData } from "./Data/data.js";
 import { testData } from "./Data/testdata.js";
@@ -16,7 +16,7 @@ import TimeStats from "./Components/TimeStats/TimeStats";
 function App() {
   const [value, setvalue] = useState("");
   const [showStats, setshowStats] = useState({
-    showAnyStats: true,
+    showAnyStats: false,
     showGeneral: false,
     showKDA: false,
     showRecords: false,
@@ -88,38 +88,66 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     calculateStats(value, stats, setstats);
-    setshowStats({ ...showStats, showAnyStats: true, showGeneral: true });
+
+    setshowStats({
+      showAnyStats: true,
+      showGeneral: true,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
+  };
+
+  const reset = () => {
+    setvalue("");
+    setshowStats({
+      showAnyStats: false,
+      showGeneral: false,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
   };
 
   return (
     <div className="app">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="data">Paste your games:</label>
-        <textarea value={value} onChange={handleChange}></textarea>
-        <button type="submit">Submit</button>
-      </form>
-      {showStats.showAnyStats && <SelectStats props={[showStats, setshowStats]} />}
-      {showStats.showAnyStats && (
-        <main>
-          {showStats.showGeneral && (
-            <GeneralStats
-              props={{ victories, defeats, remakes, games, winratio, creepScore, CSPerMinute }}
-            />
-          )}
-          {showStats.showKDA && (
-            <KDAStats
-              props={{ kills, deaths, assists, KDA, deathlessGames, deathlessGamesPercent }}
-            />
-          )}
-          {showStats.showRecords && (
-            <RecordsStats props={{ mostKills, mostDeaths, mostAssists, highKDA }} />
-          )}
-          {showStats.showMVP && (
-            <MVPStats props={{ MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent }} />
-          )}
-          {showStats.showTime && <TimeStats props={{ gameTime, shortestGame, longestGame }} />}
-        </main>
-      )}
+      <div className="content">
+        <h1>OP.GG Stats Calculator</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="data">Paste your games:</label>
+          <textarea value={value} onChange={handleChange} />
+          <div className="form-buttons-container">
+            <button type="button" onClick={reset}>
+              Reset
+            </button>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        {showStats.showAnyStats && <SelectStats props={[showStats, setshowStats]} />}
+        {showStats.showAnyStats && (
+          <main>
+            {showStats.showGeneral && (
+              <GeneralStats
+                props={{ victories, defeats, remakes, games, winratio, creepScore, CSPerMinute }}
+              />
+            )}
+            {showStats.showKDA && (
+              <KDAStats
+                props={{ kills, deaths, assists, KDA, deathlessGames, deathlessGamesPercent }}
+              />
+            )}
+            {showStats.showRecords && (
+              <RecordsStats props={{ mostKills, mostDeaths, mostAssists, highKDA }} />
+            )}
+            {showStats.showMVP && (
+              <MVPStats props={{ MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent }} />
+            )}
+            {showStats.showTime && <TimeStats props={{ gameTime, shortestGame, longestGame }} />}
+          </main>
+        )}
+      </div>
     </div>
   );
 }

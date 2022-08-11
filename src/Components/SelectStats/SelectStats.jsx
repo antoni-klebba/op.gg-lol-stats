@@ -5,7 +5,7 @@ const SelectStats = ({ props }) => {
 
   const handleStatsChange = (statToChange) => {
     setshowStats({
-      ...showStats,
+      showAnyStats: true,
       showGeneral: false,
       showKDA: false,
       showRecords: false,
@@ -15,12 +15,32 @@ const SelectStats = ({ props }) => {
     });
   };
   return (
-    <div>
-      <button onClick={() => handleStatsChange("showGeneral")}>General stats</button>
-      <button onClick={() => handleStatsChange("showKDA")}>KDA stats</button>
-      <button onClick={() => handleStatsChange("showRecords")}>Records stats</button>
-      <button onClick={() => handleStatsChange("showMVP")}>MVP stats</button>
-      <button onClick={() => handleStatsChange("showTime")}>Time stats</button>
+    <div className="select-stats">
+      <button
+        className={showStats.showGeneral && "active-stats"}
+        onClick={() => handleStatsChange("showGeneral")}>
+        General stats
+      </button>
+      <button
+        className={showStats.showKDA && "active-stats"}
+        onClick={() => handleStatsChange("showKDA")}>
+        KDA stats
+      </button>
+      <button
+        className={showStats.showRecords && "active-stats"}
+        onClick={() => handleStatsChange("showRecords")}>
+        Records stats
+      </button>
+      <button
+        className={showStats.showMVP && "active-stats"}
+        onClick={() => handleStatsChange("showMVP")}>
+        MVP stats
+      </button>
+      <button
+        className={showStats.showTime && "active-stats"}
+        onClick={() => handleStatsChange("showTime")}>
+        Time stats
+      </button>
     </div>
   );
 };

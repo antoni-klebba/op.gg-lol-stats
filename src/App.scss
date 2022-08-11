@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+
+.content {
+  height: 100%;
+  width: 60%;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  line-height: 1.5;
+}
+
+button {
+  padding: 8px 0px;
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background-color: rgb(83, 131, 232);
+  border: 1px solid black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: rgb(62, 111, 215);
+}
+
+button:active {
+  color: #0deadf;
+}
+
+textarea {
+  width: 100%;
+  height: 20vh;
+}
+
+.form-buttons-container {
+  margin-top: 20px;
+  width: 70%;
+  display: grid;
+  gap: 10px;
+  grid-auto-flow: column;
+  align-content: center;
+}
+
+.active-stats {
+  color: #0deadf;
+}
+
+.stats-container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: rgba(40, 52, 78, 0.903);
+  border: 1px solid black;
+  color: white;
+
+  ul {
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+}
+
+.mvp-adno {
+  margin-top: 10px;
+  font-size: 0.7em;
+}

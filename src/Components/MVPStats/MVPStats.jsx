@@ -3,8 +3,7 @@ import "./MVPStats.scss";
 const MVPStats = ({ props }) => {
   const { MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent } = props;
   return (
-    <div className="mvp-stats">
-      <h2>MVP stats:</h2>
+    <div className="stats-container">
       <ul>
         <li>
           Number of games with MVP:{" "}
@@ -34,10 +33,10 @@ const MVPStats = ({ props }) => {
         </li>
       </ul>
 
-      <p>
+      <p className="mvp-adno">
         <sup>1&#41;</sup> MVP – Most Valuable Player in winning team
       </p>
-      <p>
+      <p className="mvp-adno">
         <sup>2&#41;</sup> ACE – Most Valuable Player in losing team
       </p>
     </div>

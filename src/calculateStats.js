@@ -62,6 +62,7 @@ export const calculateStats = function (gamesData, stats, setstats) {
 
   // Time
   const arrOfTime = data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g);
+
   calculateTime(arrOfTime);
 
   // Print result

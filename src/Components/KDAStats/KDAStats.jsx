@@ -3,8 +3,7 @@ import "./KDAStats.scss";
 const KDAStats = ({ props }) => {
   const { kills, deaths, assists, KDA, deathlessGames, deathlessGamesPercent } = props;
   return (
-    <div>
-      <h2>KDA stats:</h2>
+    <div className="stats-container">
       <ul>
         <li>
           Total kills: <span>{kills}</span>

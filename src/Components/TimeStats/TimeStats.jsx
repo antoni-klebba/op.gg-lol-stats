@@ -3,8 +3,7 @@ import "./TimeStats.scss";
 const TimeStats = ({ props }) => {
   const { gameTime, shortestGame, longestGame } = props;
   return (
-    <div>
-      <h2>Time stats:</h2>
+    <div className="stats-container">
       <ul>
         <li>
           Average game time: <span>{gameTime}</span>
