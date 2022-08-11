@@ -3,8 +3,59 @@ const deathsArr = [];
 const assistsArr = [];
 const kdaNumArr = [];
 
-export const calculateStats = function (gamesData, stats, setstats) {
+export const calculateStats = function (
+  gamesData,
+  setstats,
+  setIsError,
+  setErrorMsg,
+  setshowStats,
+  setInstructionHighlight
+) {
   const data = gamesData;
+
+  // Validate
+  if (data.length < 300) {
+    setIsError(true);
+    setErrorMsg("You need to paste more data");
+    setshowStats({
+      showAnyStats: false,
+      showGeneral: false,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
+    return;
+  }
+
+  if (data.match(/(\d{2}) (\d{2}|\d)|[5-9] (\d{2}|\d)/g)) {
+    setIsError(true);
+    setErrorMsg(`Wrong data. Try changing the language to English in OP.GG.`);
+    setshowStats({
+      showAnyStats: false,
+      showGeneral: false,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
+    return;
+  }
+
+  if (!data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g)) {
+    setIsError(true);
+    setErrorMsg(`Wrong data. Check out the instruction :)`);
+    setInstructionHighlight(true);
+    setshowStats({
+      showAnyStats: false,
+      showGeneral: false,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
+    return;
+  }
 
   // Number of games
   const numOfVictories = data.match(/Victory/g) ? data.match(/Victory/g).length : 0;
@@ -65,40 +116,8 @@ export const calculateStats = function (gamesData, stats, setstats) {
 
   calculateTime(arrOfTime);
 
-  // Print result
-  console.log(`Victories: ${numOfVictories}`);
-  console.log(`Defeats: ${numOfDefeats}`);
-  console.log(`Remakes: ${numOfRemakes}`);
-  console.log(`Sum of games: ${numOfGames}`);
-  console.log(`Win rate: ${winratio}%`);
-  console.log(`Kills: ${numOfKills}`);
-  console.log(`Deaths: ${numOfDeaths}`);
-  console.log(`Assists: ${numOfAssists}`);
-  console.log(`Most kills in a single game: ${mostKills}`);
-  console.log(`Most deaths in a single game: ${mostDeaths}`);
-  console.log(`Most assists in a single game: ${mostAssists}`);
-  console.log(`Highest KDA: ${highestKda}`);
-  console.log(`KDA: ${avgKda}\n`);
-  console.log(`Number of deathless games: ${numOfDeathlessGames}`);
-  console.log(`Percent of deathless games: ${percentOfDeathlessGames}%`);
-  console.log(`Numbers of games with MVP: ${numOfMVP}`);
-  console.log(
-    `Percent of games with MVP: ${percentOfMVP}%   (MVP can be claimed only in won games)`
-  );
-  console.log(`Numbers of games with ACE: ${numOfACE}`);
-  console.log(
-    `Percent of games with ACE: ${percentOfACE}%   (ACE can be claimed only in lost games)`
-  );
-  console.log(`Numbers of games with MVP or ACE: ${numOfMvpOrAce}`);
-  console.log(`Percent of games with MVP or ACE: ${percentOfMvpOrAce}%`);
-  console.log(`Average Creeps killed in game: ${creepScore}`);
-  console.log(`Average Creeps killed per minute: ${CSPerMinute}`);
-  console.log(`Average game time: ${calculateTime(arrOfTime).avgTime}`);
-  console.log(`Shortest game: ${calculateTime(arrOfTime).shortestGame}`);
-  console.log(`Longest game: ${calculateTime(arrOfTime).longestGame}`);
-
+  // setState
   setstats({
-    ...stats,
     victories: numOfVictories,
     defeats: numOfDefeats,
     remakes: numOfRemakes,
@@ -126,6 +145,18 @@ export const calculateStats = function (gamesData, stats, setstats) {
     shortestGame: calculateTime(arrOfTime).shortestGame,
     longestGame: calculateTime(arrOfTime).longestGame,
   });
+
+  setshowStats({
+    showAnyStats: true,
+    showGeneral: true,
+    showKDA: false,
+    showRecords: false,
+    showMVP: false,
+    showTime: false,
+  });
+
+  setIsError(false);
+  setInstructionHighlight(false);
 };
 
 const calculateKda = (kda) => {

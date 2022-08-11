@@ -6,11 +6,13 @@ import img3 from "../../img/3.jpg";
 import img4 from "../../img/4.jpg";
 
 const Instruction = ({ setShowInstruction }) => {
-  console.log(setShowInstruction);
-
   return (
     <>
-      <div className="backdrop"></div>
+      <div
+        className="backdrop"
+        onClick={() => {
+          setShowInstruction(false);
+        }}></div>
       <div id="instruction">
         <h3>How to use stats calculator</h3>
         <p>

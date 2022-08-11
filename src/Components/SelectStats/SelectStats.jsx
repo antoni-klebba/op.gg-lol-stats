@@ -17,27 +17,27 @@ const SelectStats = ({ props }) => {
   return (
     <div className="select-stats">
       <button
-        className={showStats.showGeneral && "active-stats"}
+        className={showStats.showGeneral ? "active-stats" : undefined}
         onClick={() => handleStatsChange("showGeneral")}>
         General stats
       </button>
       <button
-        className={showStats.showKDA && "active-stats"}
+        className={showStats.showKDA ? "active-stats" : undefined}
         onClick={() => handleStatsChange("showKDA")}>
         KDA stats
       </button>
       <button
-        className={showStats.showRecords && "active-stats"}
+        className={showStats.showRecords ? "active-stats" : undefined}
         onClick={() => handleStatsChange("showRecords")}>
         Records stats
       </button>
       <button
-        className={showStats.showMVP && "active-stats"}
+        className={showStats.showMVP ? "active-stats" : undefined}
         onClick={() => handleStatsChange("showMVP")}>
         MVP stats
       </button>
       <button
-        className={showStats.showTime && "active-stats"}
+        className={showStats.showTime ? "active-stats" : undefined}
         onClick={() => handleStatsChange("showTime")}>
         Time stats
       </button>

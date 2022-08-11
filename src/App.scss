@@ -13,6 +13,9 @@
   width: 100vw;
   height: 100vh;
   font-family: "Roboto", sans-serif;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .content {
@@ -30,6 +33,8 @@ main {
 h1 {
   margin-top: 50px;
   margin-bottom: 30px;
+  text-shadow: 0 0 5px black;
+  color: white;
 }
 
 form {
@@ -42,6 +47,8 @@ form {
 
 label {
   margin-bottom: 10px;
+  text-shadow: 0 0 3px black;
+  color: white;
 }
 
 ul {
@@ -114,23 +121,74 @@ textarea {
   font-size: 0.7em;
 }
 
-#show-instruction {
+#show-instruction-container {
   position: absolute;
   right: 5%;
   top: 5%;
-  font-size: 1.8em;
-  color: white;
-  background-color: rgb(83, 131, 232);
-  width: 40px;
+  display: flex;
+  align-items: center;
+  width: 200px;
   height: 40px;
-  border-radius: 50%;
-  border: none;
+
+  p {
+    text-shadow: 0 0 3px black;
+    color: white;
+    font-size: 0.9em;
+    margin-right: 10px;
+  }
+
+  button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    font-size: 1.8em;
+    color: white;
+    border-radius: 50%;
+    border: none;
+  }
+  button::after {
+    content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .instruction-highlight {
+    animation: highlight 1.5s infinite;
+  }
 }
 
-#show-instruction::after {
-  content: "?";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@keyframes highlight {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0 0 15px 5px red;
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
+.random-background-1 {
+  background-image: url("https://i.imgur.com/kvYRCNK.png");
+}
+
+.random-background-2 {
+  background-image: url("https://i.imgur.com/eQ9Nwts.png");
+}
+
+.random-background-3 {
+  background-image: url("./img/chip.jpg");
+}
+
+.random-background-4 {
+  background-image: url("https://how2play.pl/wp-content/uploads/2019/10/legends-of-runeterra-poro-3.jpg");
+}
+
+.random-background-5 {
+  background-image: url("https://images7.alphacoders.com/107/1071030.jpg");
 }

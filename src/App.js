@@ -14,6 +14,7 @@ import KDAStats from "./Components/KDAStats/KDAStats";
 import RecordsStats from "./Components/RecordsStats/RecordsStats";
 import MVPStats from "./Components/MVPStats/MVPStats";
 import TimeStats from "./Components/TimeStats/TimeStats";
+import ErrorMsg from "./Components/ErrorMsg/ErrorMsg";
 
 function App() {
   const [value, setvalue] = useState("");
@@ -54,6 +55,11 @@ function App() {
     longestGame: "",
   });
   const [showInstruction, setShowInstruction] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [instructionHighlight, setInstructionHighlight] = useState(false);
+  const [wallpaper, setWallpaper] = useState(Math.floor(Math.random() * 5) + 1);
+  console.log(wallpaper);
 
   const {
     victories,
@@ -90,16 +96,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    calculateStats(value, stats, setstats);
-
-    setshowStats({
-      showAnyStats: true,
-      showGeneral: true,
-      showKDA: false,
-      showRecords: false,
-      showMVP: false,
-      showTime: false,
-    });
+    calculateStats(value, setstats, setIsError, setErrorMsg, setshowStats, setInstructionHighlight);
   };
 
   const reset = () => {
@@ -115,8 +112,17 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <button id="show-instruction" onClick={() => setShowInstruction(true)}></button>
+    <div className={`app random-background-${wallpaper}`}>
+      <div id="show-instruction-container">
+        <p>Show instruction</p>
+        <button
+          id={"show-instruction"}
+          className={instructionHighlight ? "instruction-highlight" : undefined}
+          onClick={() => {
+            setShowInstruction(true);
+            setInstructionHighlight(false);
+          }}></button>
+      </div>
       {showInstruction && <Instruction setShowInstruction={setShowInstruction} />}
       <div className="content">
         <h1>OP.GG Stats Calculator</h1>
@@ -152,6 +158,7 @@ function App() {
             {showStats.showTime && <TimeStats props={{ gameTime, shortestGame, longestGame }} />}
           </main>
         )}
+        {isError && <ErrorMsg errorMsg={errorMsg} />}
       </div>
     </div>
   );
