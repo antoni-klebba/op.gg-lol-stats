@@ -16,17 +16,15 @@ const Instruction = ({ setShowInstruction }) => {
       <div id="instruction">
         <h3>How to use stats calculator</h3>
         <p>
-          0. Visit{" "}
+          1. Visit
           <a href="https://eune.op.gg/" target="blank">
             OP.GG
-          </a>{" "}
+          </a>
           and search for account you are intereseted in
         </p>
-        <p>1. Change language to English:</p>
+        <p>2. Change language to English:</p>
         <img src={img1} alt="first step" />
         <img src={img2} alt="second step" />
-        <p>2. Filter matches:</p>
-        <img src={img3} alt="third step" />
         <p>3. Select and copy data:</p>
         <img src={img4} alt="last step" />
         <p>4. Paste it to stats calculator.</p>
