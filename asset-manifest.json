@@ -1,13 +1,17 @@
 {
   "files": {
-    "main.css": "/op.gg-lol-stats/static/css/main.be97a4b4.css",
-    "main.js": "/op.gg-lol-stats/static/js/main.f1005646.js",
+    "main.css": "/op.gg-lol-stats/static/css/main.d1d736ea.css",
+    "main.js": "/op.gg-lol-stats/static/js/main.ac75d413.js",
+    "static/media/4.jpg": "/op.gg-lol-stats/static/media/4.3747b099a3aa2aa8ee3e.jpg",
+    "static/media/3.jpg": "/op.gg-lol-stats/static/media/3.3988df19035d50521d17.jpg",
+    "static/media/2.jpg": "/op.gg-lol-stats/static/media/2.b0d0a85b2b033a27595f.jpg",
+    "static/media/1.jpg": "/op.gg-lol-stats/static/media/1.4034cb758ca5dd3c0573.jpg",
     "index.html": "/op.gg-lol-stats/index.html",
-    "main.be97a4b4.css.map": "/op.gg-lol-stats/static/css/main.be97a4b4.css.map",
-    "main.f1005646.js.map": "/op.gg-lol-stats/static/js/main.f1005646.js.map"
+    "main.d1d736ea.css.map": "/op.gg-lol-stats/static/css/main.d1d736ea.css.map",
+    "main.ac75d413.js.map": "/op.gg-lol-stats/static/js/main.ac75d413.js.map"
   },
   "entrypoints": [
-    "static/css/main.be97a4b4.css",
-    "static/js/main.f1005646.js"
+    "static/css/main.d1d736ea.css",
+    "static/js/main.ac75d413.js"
   ]
 }
