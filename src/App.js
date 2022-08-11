@@ -59,7 +59,6 @@ function App() {
   const [errorMsg, setErrorMsg] = useState("");
   const [instructionHighlight, setInstructionHighlight] = useState(false);
   const [wallpaper, setWallpaper] = useState(Math.floor(Math.random() * 5) + 1);
-  console.log(wallpaper);
 
   const {
     victories,

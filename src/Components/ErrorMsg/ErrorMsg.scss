@@ -1,5 +1,15 @@
+.error-container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background-color: rgba(40, 52, 78, 0.903);
+  border: 1px solid black;
+  color: white;
+}
+
 #error-msg {
-  margin-top: 50px;
   font-size: 1.5rem;
-  color: #e84057;
 }

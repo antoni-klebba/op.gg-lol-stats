@@ -1,7 +1,11 @@
 import "./ErrorMsg.scss";
 
 const ErrorMsg = ({ errorMsg }) => {
-  return <p id="error-msg">{errorMsg}</p>;
+  return (
+    <div className="error-container">
+      <p id="error-msg">{errorMsg}</p>
+    </div>
+  );
 };
 
 export default ErrorMsg;
