@@ -87,12 +87,12 @@ export const calculateStats = function (
   //MVP and Ace
   const numOfMVP = data.match(/\nMVP\n/g) ? data.match(/\nMVP\n/g).length : 0;
   const percentOfMVP = (
-    numOfMVP / numOfVictories === NaN ? 0 : (numOfMVP / numOfVictories) * 100
+    numOfMVP / isNaN(numOfVictories) ? 0 : (numOfMVP / numOfVictories) * 100
   ).toFixed(2);
 
   const numOfACE = data.match(/\nACE\n/g) ? data.match(/\nACE\n/g).length : 0;
   const percentOfACE = (
-    numOfACE / numOfDefeats === NaN ? 0 : (numOfACE / numOfDefeats) * 100
+    numOfACE / isNaN(numOfDefeats) ? 0 : (numOfACE / numOfDefeats) * 100
   ).toFixed(2);
 
   const numOfMvpOrAce = data.match(/\nMVP\n|\nACE\n/g) ? data.match(/\nMVP\n|\nACE\n/g).length : 0;

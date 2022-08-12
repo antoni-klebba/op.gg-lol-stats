@@ -17,6 +17,15 @@ import TimeStats from "./Components/TimeStats/TimeStats";
 import ErrorMsg from "./Components/ErrorMsg/ErrorMsg";
 
 function App() {
+  const convertToBoolean = (str) => {
+    if (str === "true") return true;
+    else if (str === "false") return false;
+  };
+
+  if (localStorage.getItem("instructionOnLoad") === null) {
+    localStorage.setItem("instructionOnLoad", true);
+  }
+
   const [value, setvalue] = useState("");
   const [showStats, setshowStats] = useState({
     showAnyStats: false,
@@ -54,7 +63,9 @@ function App() {
     shortestGame: "",
     longestGame: "",
   });
-  const [showInstruction, setShowInstruction] = useState(true);
+  const [showInstruction, setShowInstruction] = useState(
+    convertToBoolean(localStorage.getItem("instructionOnLoad"))
+  );
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [instructionHighlight, setInstructionHighlight] = useState(false);
@@ -127,7 +138,7 @@ function App() {
         <h1>OP.GG Stats Calculator</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="data">Paste your games:</label>
-          <textarea value={value} onChange={handleChange} spellcheck="false" />
+          <textarea value={value} onChange={handleChange} spellCheck="false" />
           <div className="form-buttons-container">
             <button type="button" onClick={reset}>
               Reset
