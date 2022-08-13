@@ -42,6 +42,20 @@ export const calculateStats = function (
     return;
   }
 
+  if (data.match("Remake") && !data.match("Victory") && !data.match("Defeat")) {
+    setIsError(true);
+    setErrorMsg(`Try entering not only remake games.`);
+    setshowStats({
+      showAnyStats: false,
+      showGeneral: false,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
+    return;
+  }
+
   if (!data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g)) {
     setIsError(true);
     setErrorMsg(`Wrong data. Check out the instruction :)`);
@@ -86,14 +100,10 @@ export const calculateStats = function (
 
   //MVP and Ace
   const numOfMVP = data.match(/\nMVP\n/g) ? data.match(/\nMVP\n/g).length : 0;
-  const percentOfMVP = (
-    numOfMVP / isNaN(numOfVictories) ? 0 : (numOfMVP / numOfVictories) * 100
-  ).toFixed(2);
+  const percentOfMVP = ((numOfMVP / (numOfVictories === 0 ? 1 : numOfVictories)) * 100).toFixed(2);
 
   const numOfACE = data.match(/\nACE\n/g) ? data.match(/\nACE\n/g).length : 0;
-  const percentOfACE = (
-    numOfACE / isNaN(numOfDefeats) ? 0 : (numOfACE / numOfDefeats) * 100
-  ).toFixed(2);
+  const percentOfACE = ((numOfACE / (numOfDefeats === 0 ? 1 : numOfDefeats)) * 100).toFixed(2);
 
   const numOfMvpOrAce = data.match(/\nMVP\n|\nACE\n/g) ? data.match(/\nMVP\n|\nACE\n/g).length : 0;
   const percentOfMvpOrAce = ((numOfMvpOrAce / numOfGames) * 100).toFixed(2);
@@ -180,20 +190,25 @@ const calculateTime = (arrOfTime) => {
     minutesArr.push(item[0].slice(0, -1));
     secondsArr.push(item[1].slice(0, -1));
   });
-  // console.log(minutesArr);
-  // console.log(secondsArr);
 
   longestGame(arrOfTime, minutesArr, secondsArr);
   shortestGame(arrOfTime, minutesArr, secondsArr);
 
-  const avgSeconds =
-    (minutesArr.reduce((a, b) => Number(a) + Number(b)) * 60 +
-      secondsArr.reduce((a, b) => Number(a) + Number(b))) /
-    arrOfTime.length;
-  const avgMinutes = Math.floor(avgSeconds / 60);
-  const seconds = Math.round(avgSeconds - avgMinutes * 60);
+  let seconds = 0;
+
+  if (arrOfTime.length === 1) {
+    seconds = +minutesArr[0] * 60 + +secondsArr[0];
+  } else {
+    seconds =
+      (minutesArr.reduce((a, b) => +a + +b) * 60 + secondsArr.reduce((a, b) => +a + +b)) /
+      arrOfTime.length;
+  }
+
+  const avgMinutes = Math.floor(seconds / 60);
+  const avgSeconds = Math.round(seconds - avgMinutes * 60);
+
   return {
-    avgTime: `${avgMinutes}m:${seconds}s`,
+    avgTime: `${avgMinutes}m:${avgSeconds < 10 ? `0${avgSeconds}` : avgSeconds}s`,
     shortestGame: shortestGame(arrOfTime, minutesArr, secondsArr),
     longestGame: longestGame(arrOfTime, minutesArr, secondsArr),
   };
@@ -214,7 +229,7 @@ const longestGame = (arrOfTime, minutesArr, secondsArr) => {
   }
 
   const biggestSec = biggestSecArr.sort((a, b) => b - a)[0];
-  return `${biggestMin}m:${biggestSec}s`;
+  return `${biggestMin}m:${biggestSec < 10 ? `0${biggestSec}` : biggestSec}s`;
 };
 
 const shortestGame = (arrOfTime, minutesArr, secondsArr) => {
@@ -229,5 +244,5 @@ const shortestGame = (arrOfTime, minutesArr, secondsArr) => {
 
   const lowestSec = lowestSecArr.sort((a, b) => a - b)[0];
 
-  return `${lowestMin}m:${lowestSec}s`;
+  return `${lowestMin}m:${lowestSec < 10 ? `0${lowestSec}` : lowestSec}s`;
 };
