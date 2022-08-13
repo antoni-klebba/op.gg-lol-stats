@@ -12,6 +12,10 @@ export const calculateStats = function (
   setInstructionHighlight
 ) {
   const data = gamesData;
+  killsArr.length = 0;
+  deathsArr.length = 0;
+  assistsArr.length = 0;
+  kdaNumArr.length = 0;
 
   // Validate
   if (data.length < 300) {
@@ -28,9 +32,12 @@ export const calculateStats = function (
     return;
   }
 
-  if (data.match(/(\d{2}) (\d{2}|\d)|[5-9] (\d{2}|\d)/g)) {
+  if (
+    data.match(/(\d{2}) (\d{2}|\d)|[5-9] (\d{2}|\d)/g) &&
+    !data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g)
+  ) {
     setIsError(true);
-    setErrorMsg(`Wrong data. Try changing the language to English in OP.GG.`);
+    setErrorMsg("Wrong data. Try changing the language to English in OP.GG.");
     setshowStats({
       showAnyStats: false,
       showGeneral: false,
@@ -56,7 +63,10 @@ export const calculateStats = function (
     return;
   }
 
-  if (!data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g)) {
+  if (
+    !data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g) &&
+    !data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g)
+  ) {
     setIsError(true);
     setErrorMsg(`Wrong data. Check out the instruction :)`);
     setInstructionHighlight(true);
@@ -92,7 +102,9 @@ export const calculateStats = function (
   const mostDeaths = deathsArr.sort((a, b) => b - a)[0];
   const mostAssists = assistsArr.sort((a, b) => b - a)[0];
 
-  const avgKda = ((numOfKills + numOfAssists) / numOfDeaths).toFixed(2);
+  const avgKda = ((+numOfKills + +numOfAssists) / (+numOfDeaths === 0 ? 1 : +numOfDeaths)).toFixed(
+    2
+  );
   const highestKda = kdaNumArr.sort((a, b) => b - a)[0];
 
   const numOfDeathlessGames = data.match(/Perfect KDA/g) ? data.match(/Perfect KDA/g).length : 0;

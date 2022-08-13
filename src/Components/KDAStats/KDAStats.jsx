@@ -6,6 +6,9 @@ const KDAStats = ({ props }) => {
     <div className="stats-container">
       <ul>
         <li>
+          Total KDA: <span>{KDA}</span>
+        </li>
+        <li>
           Total kills: <span>{kills}</span>
         </li>
         <li>
@@ -13,9 +16,6 @@ const KDAStats = ({ props }) => {
         </li>
         <li>
           Total assists: <span>{assists}</span>
-        </li>
-        <li>
-          Average KDA: <span>{KDA}</span>
         </li>
         <li>
           Number of deathless games: <span>{deathlessGames}</span>
