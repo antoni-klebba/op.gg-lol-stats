@@ -119,6 +119,9 @@ function App() {
       showMVP: false,
       showTime: false,
     });
+    setIsError(false);
+    setErrorMsg("");
+    setInstructionHighlight(false);
   };
 
   return (
@@ -143,7 +146,7 @@ function App() {
             <button type="button" onClick={reset}>
               Reset
             </button>
-            <button type="submit">Submit</button>
+            <button type="submit">Calculate</button>
           </div>
         </form>
         {showStats.showAnyStats && <SelectStats props={[showStats, setshowStats]} />}
