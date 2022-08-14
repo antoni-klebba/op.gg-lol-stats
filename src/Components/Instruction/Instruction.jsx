@@ -13,8 +13,6 @@ const Instruction = ({ setShowInstruction }) => {
   const [checked, setChecked] = useState(
     localStorage.getItem("instructionOnLoad") === "true" ? false : true
   );
-  console.log("show", showInstructionCheckbox);
-  console.log("checked", checked);
 
   const handleInstructionClose = () => {
     if (!showInstructionCheckbox && checked) {

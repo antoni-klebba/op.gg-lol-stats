@@ -9,9 +9,24 @@ export const calculateStats = function (
   setIsError,
   setErrorMsg,
   setshowStats,
-  setInstructionHighlight
+  setInstructionHighlight,
+  whichGames
 ) {
-  const data = gamesData;
+  let data = null;
+  if (whichGames === "all-games") {
+    data = gamesData;
+  } else if (whichGames === "victories") {
+    data = gamesData
+      .split(/ago\n/g)
+      .filter((item) => item.match("Victory\n"))
+      .join("");
+  } else if (whichGames === "defeats") {
+    data = gamesData
+      .split(/ago\n/g)
+      .filter((item) => item.match("Defeat\n"))
+      .join("");
+  }
+
   killsArr.length = 0;
   deathsArr.length = 0;
   assistsArr.length = 0;
@@ -37,7 +52,9 @@ export const calculateStats = function (
     !data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g)
   ) {
     setIsError(true);
-    setErrorMsg("Wrong data. Try changing the language to English in OP.GG.");
+    setErrorMsg(
+      "This calculator supports only English language. Try changing the language to English in OP.GG."
+    );
     setshowStats({
       showAnyStats: false,
       showGeneral: false,
@@ -86,6 +103,7 @@ export const calculateStats = function (
   const numOfDefeats = data.match(/Defeat/g) ? data.match(/Defeat/g).length : 0;
   const numOfRemakes = data.match(/Remake/g) ? data.match(/Remake/g).length : 0;
   const numOfGames = numOfVictories + numOfDefeats;
+  console.log(numOfGames);
 
   // Win ratio
   const winratio = ((numOfVictories / (numOfDefeats + numOfVictories)) * 100).toFixed(2);
@@ -123,14 +141,14 @@ export const calculateStats = function (
   // CS
   const creepScoreArr = data.match(/CS (\d\d\d\d|\d\d\d|\d\d|\d)/g).map((item) => item.slice(3));
   const creepScore = (
-    creepScoreArr.reduce((a, b) => Number(a) + Number(b)) / Number(creepScoreArr.length)
+    creepScoreArr.reduce((a, b) => Number(a) + Number(b)) / Number(numOfGames)
   ).toFixed(1);
 
   const CSPerMinuteArr = data
     .match(/(\(\d.\d\))|\(\d\)/g)
     .map((item) => item.slice(1, item.length - 1));
   const CSPerMinute = (
-    CSPerMinuteArr.reduce((a, b) => Number(a) + Number(b)) / Number(CSPerMinuteArr.length)
+    CSPerMinuteArr.reduce((a, b) => Number(a) + Number(b)) / Number(numOfGames)
   ).toFixed(1);
 
   // Time
@@ -139,34 +157,35 @@ export const calculateStats = function (
   calculateTime(arrOfTime);
 
   // setState
-  setstats({
-    victories: numOfVictories,
-    defeats: numOfDefeats,
-    remakes: numOfRemakes,
-    games: numOfGames,
-    winratio: winratio,
-    kills: numOfKills,
-    deaths: numOfDeaths,
-    assists: numOfAssists,
-    mostKills: mostKills,
-    mostDeaths: mostDeaths,
-    mostAssists: mostAssists,
-    highKDA: highestKda,
-    KDA: avgKda,
-    deathlessGames: numOfDeathlessGames,
-    deathlessGamesPercent: percentOfDeathlessGames,
-    MVP: numOfMVP,
-    MVPPercent: percentOfMVP,
-    ACE: numOfACE,
-    ACEPercent: percentOfACE,
-    MVPOrACE: numOfMvpOrAce,
-    MVPOrACEPercent: percentOfMvpOrAce,
-    creepScore: creepScore,
-    CSPerMinute: CSPerMinute,
-    gameTime: calculateTime(arrOfTime).avgTime,
-    shortestGame: calculateTime(arrOfTime).shortestGame,
-    longestGame: calculateTime(arrOfTime).longestGame,
-  });
+  if (whichGames)
+    setstats({
+      victories: numOfVictories,
+      defeats: numOfDefeats,
+      remakes: numOfRemakes,
+      games: numOfGames,
+      winratio: winratio,
+      kills: numOfKills,
+      deaths: numOfDeaths,
+      assists: numOfAssists,
+      mostKills: mostKills,
+      mostDeaths: mostDeaths,
+      mostAssists: mostAssists,
+      highKDA: highestKda,
+      KDA: avgKda,
+      deathlessGames: numOfDeathlessGames,
+      deathlessGamesPercent: percentOfDeathlessGames,
+      MVP: numOfMVP,
+      MVPPercent: percentOfMVP,
+      ACE: numOfACE,
+      ACEPercent: percentOfACE,
+      MVPOrACE: numOfMvpOrAce,
+      MVPOrACEPercent: percentOfMvpOrAce,
+      creepScore: creepScore,
+      CSPerMinute: CSPerMinute,
+      gameTime: calculateTime(arrOfTime).avgTime,
+      shortestGame: calculateTime(arrOfTime).shortestGame,
+      longestGame: calculateTime(arrOfTime).longestGame,
+    });
 
   setshowStats({
     showAnyStats: true,

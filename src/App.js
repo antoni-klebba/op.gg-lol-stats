@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.scss";
 
@@ -15,6 +15,8 @@ import RecordsStats from "./Components/RecordsStats/RecordsStats";
 import MVPStats from "./Components/MVPStats/MVPStats";
 import TimeStats from "./Components/TimeStats/TimeStats";
 import ErrorMsg from "./Components/ErrorMsg/ErrorMsg";
+
+// TODO - redo CS calculations
 
 function App() {
   const convertToBoolean = (str) => {
@@ -70,6 +72,7 @@ function App() {
   const [errorMsg, setErrorMsg] = useState("");
   const [instructionHighlight, setInstructionHighlight] = useState(false);
   const [wallpaper, setWallpaper] = useState(Math.floor(Math.random() * 5) + 1);
+  const [whichGames, setWhichGames] = useState("all-games");
 
   const {
     victories,
@@ -100,13 +103,35 @@ function App() {
     longestGame,
   } = stats;
 
+  useEffect(() => {
+    if (showStats.showAnyStats) {
+      calculateStats(
+        value,
+        setstats,
+        setIsError,
+        setErrorMsg,
+        setshowStats,
+        setInstructionHighlight,
+        whichGames
+      );
+    }
+  }, [whichGames]);
+
   const handleChange = (e) => {
     setvalue(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    calculateStats(value, setstats, setIsError, setErrorMsg, setshowStats, setInstructionHighlight);
+    calculateStats(
+      value,
+      setstats,
+      setIsError,
+      setErrorMsg,
+      setshowStats,
+      setInstructionHighlight,
+      whichGames
+    );
   };
 
   const reset = () => {
@@ -122,6 +147,11 @@ function App() {
     setIsError(false);
     setErrorMsg("");
     setInstructionHighlight(false);
+    setWhichGames("all-games");
+  };
+
+  const handleRadioChange = (e) => {
+    setWhichGames(e.target.value);
   };
 
   return (
@@ -142,6 +172,36 @@ function App() {
         <form onSubmit={handleSubmit}>
           <label htmlFor="data">Paste your games:</label>
           <textarea value={value} onChange={handleChange} spellCheck="false" />
+
+          <div className="radio-container">
+            <label htmlFor="all-games">All games</label>
+            <input
+              type="radio"
+              name="which-games"
+              id="all-games"
+              value="all-games"
+              checked={whichGames === "all-games"}
+              onChange={(e) => handleRadioChange(e)}
+            />
+            <label htmlFor="victories">Only victories</label>
+            <input
+              type="radio"
+              name="which-games"
+              id="victories"
+              value="victories"
+              checked={whichGames === "victories"}
+              onChange={(e) => handleRadioChange(e)}
+            />
+            <label htmlFor="defeats">Only defeats</label>
+            <input
+              type="radio"
+              name="which-games"
+              id="defeats"
+              value="defeats"
+              checked={whichGames === "defeats"}
+              onChange={(e) => handleRadioChange(e)}
+            />
+          </div>
           <div className="form-buttons-container">
             <button type="button" onClick={reset}>
               Reset
@@ -154,7 +214,16 @@ function App() {
           <main>
             {showStats.showGeneral && (
               <GeneralStats
-                props={{ victories, defeats, remakes, games, winratio, creepScore, CSPerMinute }}
+                props={{
+                  victories,
+                  defeats,
+                  remakes,
+                  games,
+                  winratio,
+                  creepScore,
+                  CSPerMinute,
+                  whichGames,
+                }}
               />
             )}
             {showStats.showKDA && (
@@ -166,7 +235,9 @@ function App() {
               <RecordsStats props={{ mostKills, mostDeaths, mostAssists, highKDA }} />
             )}
             {showStats.showMVP && (
-              <MVPStats props={{ MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent }} />
+              <MVPStats
+                props={{ MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent, whichGames }}
+              />
             )}
             {showStats.showTime && <TimeStats props={{ gameTime, shortestGame, longestGame }} />}
           </main>
