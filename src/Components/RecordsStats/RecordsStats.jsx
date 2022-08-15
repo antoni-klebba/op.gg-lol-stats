@@ -1,9 +1,11 @@
 import "./RecordsStats.scss";
+import StatsTitle from "../StatsTitle/StatsTitle";
 
 const RecordsStats = ({ props }) => {
-  const { mostKills, mostDeaths, mostAssists, highKDA } = props;
+  const { mostKills, mostDeaths, mostAssists, highKDA, whichGames } = props;
   return (
     <div className="stats-container">
+      <StatsTitle whichGames={whichGames} />
       <ul>
         <li>
           Most kills in a single game: <span>{mostKills}</span>

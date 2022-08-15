@@ -1,9 +1,11 @@
 import "./MVPStats.scss";
+import StatsTitle from "../StatsTitle/StatsTitle";
 
 const MVPStats = ({ props }) => {
   const { MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent, whichGames } = props;
   return (
     <div className="stats-container">
+      <StatsTitle whichGames={whichGames} />
       <ul>
         {!(whichGames === "defeats") && (
           <li>

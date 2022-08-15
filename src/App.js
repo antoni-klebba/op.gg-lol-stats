@@ -16,7 +16,7 @@ import MVPStats from "./Components/MVPStats/MVPStats";
 import TimeStats from "./Components/TimeStats/TimeStats";
 import ErrorMsg from "./Components/ErrorMsg/ErrorMsg";
 
-// TODO - redo CS calculations
+// TODO - Redo validation
 
 function App() {
   const convertToBoolean = (str) => {
@@ -151,8 +151,14 @@ function App() {
   };
 
   const handleRadioChange = (e) => {
-    setWhichGames(e.target.value);
+    if (e.target.value === whichGames) {
+      setWhichGames("all-games");
+    } else {
+      setWhichGames(e.target.value);
+    }
   };
+
+  console.log(whichGames);
 
   return (
     <div className={`app random-background-${wallpaper}`}>
@@ -171,36 +177,41 @@ function App() {
         <h1>OP.GG Stats Calculator</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="data">Paste your games:</label>
-          <textarea value={value} onChange={handleChange} spellCheck="false" />
+          <textarea value={value} onChange={handleChange} spellCheck="false" resize="false" />
 
           <div className="radio-container">
-            <label htmlFor="all-games">All games</label>
-            <input
-              type="radio"
-              name="which-games"
-              id="all-games"
-              value="all-games"
-              checked={whichGames === "all-games"}
-              onChange={(e) => handleRadioChange(e)}
-            />
-            <label htmlFor="victories">Only victories</label>
-            <input
-              type="radio"
-              name="which-games"
-              id="victories"
-              value="victories"
-              checked={whichGames === "victories"}
-              onChange={(e) => handleRadioChange(e)}
-            />
-            <label htmlFor="defeats">Only defeats</label>
-            <input
-              type="radio"
-              name="which-games"
-              id="defeats"
-              value="defeats"
-              checked={whichGames === "defeats"}
-              onChange={(e) => handleRadioChange(e)}
-            />
+            <div className="victories">
+              <input
+                type="radio"
+                name="which-games"
+                id="victories"
+                value="victories"
+                checked={whichGames === "victories"}
+                onChange={(e) => handleRadioChange(e)}
+                onClick={(e) => {
+                  if (e.target.value === whichGames) {
+                    setWhichGames("all-games");
+                  }
+                }}
+              />
+              <label htmlFor="victories">Victories</label>
+            </div>
+            <div className="defeats">
+              <input
+                type="radio"
+                name="which-games"
+                id="defeats"
+                value="defeats"
+                checked={whichGames === "defeats"}
+                onChange={(e) => handleRadioChange(e)}
+                onClick={(e) => {
+                  if (e.target.value === whichGames) {
+                    setWhichGames("all-games");
+                  }
+                }}
+              />
+              <label htmlFor="defeats">Defeats</label>
+            </div>
           </div>
           <div className="form-buttons-container">
             <button type="button" onClick={reset}>
@@ -228,18 +239,28 @@ function App() {
             )}
             {showStats.showKDA && (
               <KDAStats
-                props={{ kills, deaths, assists, KDA, deathlessGames, deathlessGamesPercent }}
+                props={{
+                  kills,
+                  deaths,
+                  assists,
+                  KDA,
+                  deathlessGames,
+                  deathlessGamesPercent,
+                  whichGames,
+                }}
               />
             )}
             {showStats.showRecords && (
-              <RecordsStats props={{ mostKills, mostDeaths, mostAssists, highKDA }} />
+              <RecordsStats props={{ mostKills, mostDeaths, mostAssists, highKDA, whichGames }} />
             )}
             {showStats.showMVP && (
               <MVPStats
                 props={{ MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent, whichGames }}
               />
             )}
-            {showStats.showTime && <TimeStats props={{ gameTime, shortestGame, longestGame }} />}
+            {showStats.showTime && (
+              <TimeStats props={{ gameTime, shortestGame, longestGame, whichGames }} />
+            )}
           </main>
         )}
         {isError && <ErrorMsg errorMsg={errorMsg} />}
