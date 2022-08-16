@@ -3,10 +3,13 @@ import StatsTitle from "../StatsTitle/StatsTitle";
 
 const TimeStats = ({ props }) => {
   const { gameTime, shortestGame, longestGame, whichGames } = props;
+
+  const statsSection = "Time stats";
+
   return (
     <div className="stats-box">
       <div className="stats-container">
-        <StatsTitle whichGames={whichGames} />
+        <StatsTitle props={{ whichGames, statsSection }} />
         <ul>
           <li>
             Average game time: <span>{gameTime}</span>

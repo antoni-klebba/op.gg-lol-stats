@@ -4,10 +4,11 @@ import StatsTitle from "../StatsTitle/StatsTitle";
 const GeneralStats = ({ props }) => {
   const { victories, defeats, remakes, games, winratio, creepScore, CSPerMinute, whichGames } =
     props;
+  const statsSection = "General stats";
   return (
     <div className="stats-box">
       <div className="stats-container">
-        <StatsTitle whichGames={whichGames} />
+        <StatsTitle props={{ whichGames, statsSection }} />
         <ul>
           <li>
             Victories: <span>{victories}</span>

@@ -51,6 +51,7 @@ function App() {
     mostAssists: 0,
     highKDA: 0,
     KDA: 0,
+    avgStats: "",
     deathlessGames: 0,
     deathlessGamesPercent: 0,
     MVP: 0,
@@ -88,6 +89,7 @@ function App() {
     mostAssists,
     highKDA,
     KDA,
+    avgStats,
     deathlessGames,
     deathlessGamesPercent,
     MVP,
@@ -104,7 +106,7 @@ function App() {
   } = stats;
 
   useEffect(() => {
-    if (showStats.showAnyStats) {
+    if (showStats.showAnyStats || isError) {
       const radioChange = true;
       calculateStats(
         value,
@@ -114,7 +116,8 @@ function App() {
         setshowStats,
         setInstructionHighlight,
         whichGames,
-        radioChange
+        radioChange,
+        isError
       );
     }
   }, [whichGames]);
@@ -244,6 +247,7 @@ function App() {
                   deaths,
                   assists,
                   KDA,
+                  avgStats,
                   deathlessGames,
                   deathlessGamesPercent,
                   whichGames,

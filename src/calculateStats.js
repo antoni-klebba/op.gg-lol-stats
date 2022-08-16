@@ -11,7 +11,8 @@ export const calculateStats = function (
   setshowStats,
   setInstructionHighlight,
   whichGames,
-  radioChange
+  radioChange,
+  isError
 ) {
   let data = gamesData;
 
@@ -126,6 +127,22 @@ export const calculateStats = function (
   const numOfDeaths = deathsArr.reduce((a, b) => Number(a) + Number(b));
   const numOfAssists = assistsArr.reduce((a, b) => Number(a) + Number(b));
 
+  let avgStats = "";
+
+  if (
+    (numOfKills / numOfGames) % 1 !== 0 ||
+    (numOfDeaths / numOfGames) % 1 !== 0 ||
+    (numOfAssists / numOfGames) % 1 !== 0
+  ) {
+    avgStats = `${(numOfKills / numOfGames).toFixed(1)} / ${(numOfDeaths / numOfGames).toFixed(
+      1
+    )} / ${(numOfAssists / numOfGames).toFixed(1)}`;
+  } else {
+    avgStats = `${numOfKills / numOfGames} / ${numOfDeaths / numOfGames} / ${
+      numOfAssists / numOfGames
+    }`;
+  }
+
   const mostKills = killsArr.sort((a, b) => b - a)[0];
   const mostDeaths = deathsArr.sort((a, b) => b - a)[0];
   const mostAssists = assistsArr.sort((a, b) => b - a)[0];
@@ -182,6 +199,7 @@ export const calculateStats = function (
       mostAssists: mostAssists,
       highKDA: highestKda,
       KDA: avgKda,
+      avgStats: avgStats,
       deathlessGames: numOfDeathlessGames,
       deathlessGamesPercent: percentOfDeathlessGames,
       MVP: numOfMVP,
@@ -196,7 +214,7 @@ export const calculateStats = function (
       shortestGame: calculateTime(arrOfTime).shortestGame,
       longestGame: calculateTime(arrOfTime).longestGame,
     });
-  if (!radioChange) {
+  if (!radioChange || (radioChange && isError)) {
     setshowStats({
       showAnyStats: true,
       showGeneral: true,

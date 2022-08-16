@@ -2,14 +2,29 @@ import "./KDAStats.scss";
 import StatsTitle from "../StatsTitle/StatsTitle";
 
 const KDAStats = ({ props }) => {
-  const { kills, deaths, assists, KDA, deathlessGames, deathlessGamesPercent, whichGames } = props;
+  const {
+    kills,
+    deaths,
+    assists,
+    KDA,
+    avgStats,
+    deathlessGames,
+    deathlessGamesPercent,
+    whichGames,
+  } = props;
+
+  const statsSection = "KDA stats";
+
   return (
     <div className="stats-box">
       <div className="stats-container">
-        <StatsTitle whichGames={whichGames} />
+        <StatsTitle props={{ whichGames, statsSection }} />
         <ul>
           <li>
             Total KDA: <span>{KDA}</span>
+          </li>
+          <li>
+            Average stats: <span>{avgStats}</span>
           </li>
           <li>
             Total kills: <span>{kills}</span>

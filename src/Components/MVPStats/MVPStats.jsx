@@ -3,10 +3,13 @@ import StatsTitle from "../StatsTitle/StatsTitle";
 
 const MVPStats = ({ props }) => {
   const { MVP, MVPPercent, ACE, ACEPercent, MVPOrACE, MVPOrACEPercent, whichGames } = props;
+
+  const statsSection = "MVP stats";
+
   return (
     <div className="stats-box">
       <div className="stats-container">
-        <StatsTitle whichGames={whichGames} />
+        <StatsTitle props={{ whichGames, statsSection }} />
         <ul>
           {!(whichGames === "defeats") && (
             <li>
