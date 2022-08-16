@@ -250,7 +250,7 @@ const calculateTime = (arrOfTime) => {
   const avgSeconds = Math.round(seconds - avgMinutes * 60);
 
   return {
-    avgTime: `${avgMinutes}m:${avgSeconds < 10 ? `0${avgSeconds}` : avgSeconds}s`,
+    avgTime: `${avgMinutes}m : ${avgSeconds < 10 ? `0${avgSeconds}` : avgSeconds}s`,
     shortestGame: shortestGame(arrOfTime, minutesArr, secondsArr),
     longestGame: longestGame(arrOfTime, minutesArr, secondsArr),
   };
@@ -271,7 +271,7 @@ const longestGame = (arrOfTime, minutesArr, secondsArr) => {
   }
 
   const biggestSec = biggestSecArr.sort((a, b) => b - a)[0];
-  return `${biggestMin}m:${biggestSec < 10 ? `0${biggestSec}` : biggestSec}s`;
+  return `${biggestMin}m : ${biggestSec < 10 ? `0${biggestSec}` : biggestSec}s`;
 };
 
 const shortestGame = (arrOfTime, minutesArr, secondsArr) => {
@@ -286,5 +286,5 @@ const shortestGame = (arrOfTime, minutesArr, secondsArr) => {
 
   const lowestSec = lowestSecArr.sort((a, b) => a - b)[0];
 
-  return `${lowestMin}m:${lowestSec < 10 ? `0${lowestSec}` : lowestSec}s`;
+  return `${lowestMin}m : ${lowestSec < 10 ? `0${lowestSec}` : lowestSec}s`;
 };

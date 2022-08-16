@@ -31,6 +31,9 @@
 
 main {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 h1 {
@@ -182,6 +185,7 @@ textarea {
 .form-buttons-container {
   margin-top: 20px;
   width: 70%;
+  max-width: 535px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
@@ -194,11 +198,11 @@ textarea {
   border-color: #0deadf;
 }
 
-.stats-container {
+.stats-box {
   margin-top: 30px;
   width: 100%;
-  display: grid;
-  flex-direction: column;
+  max-width: 400px;
+  display: flex;
   justify-content: center;
   align-content: center;
   padding: 30px;
@@ -206,18 +210,31 @@ textarea {
   border: 1px solid black;
   color: white;
 
-  .stats-title {
-    margin-bottom: 20px;
-    color: #0deadf;
-    font-size: 1.3em;
-    letter-spacing: 0.7px;
-  }
-
-  ul {
-    display: grid;
+  .stats-container {
+    // margin: 0 20px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-content: start;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
+
+    .stats-title {
+      margin-bottom: 20px;
+      color: #0deadf;
+      font-size: 1.3em;
+      letter-spacing: 0.7px;
+    }
+
+    ul {
+      display: grid;
+      flex-direction: column;
+      justify-content: start;
+      align-content: start;
+
+      li {
+        line-height: 1.5;
+      }
+    }
   }
 }
 
