@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/op.gg-lol-stats/static/css/main.a78941a8.css",
-    "main.js": "/op.gg-lol-stats/static/js/main.465948ce.js",
+    "main.css": "/op.gg-lol-stats/static/css/main.a3d37781.css",
+    "main.js": "/op.gg-lol-stats/static/js/main.f306ff96.js",
     "static/media/chip.jpg": "/op.gg-lol-stats/static/media/chip.c8e2770b2776664c03f5.jpg",
     "static/media/4.jpg": "/op.gg-lol-stats/static/media/4.3747b099a3aa2aa8ee3e.jpg",
     "static/media/2.jpg": "/op.gg-lol-stats/static/media/2.b0d0a85b2b033a27595f.jpg",
     "static/media/1.jpg": "/op.gg-lol-stats/static/media/1.4034cb758ca5dd3c0573.jpg",
     "index.html": "/op.gg-lol-stats/index.html",
-    "main.a78941a8.css.map": "/op.gg-lol-stats/static/css/main.a78941a8.css.map",
-    "main.465948ce.js.map": "/op.gg-lol-stats/static/js/main.465948ce.js.map"
+    "main.a3d37781.css.map": "/op.gg-lol-stats/static/css/main.a3d37781.css.map",
+    "main.f306ff96.js.map": "/op.gg-lol-stats/static/js/main.f306ff96.js.map"
   },
   "entrypoints": [
-    "static/css/main.a78941a8.css",
-    "static/js/main.465948ce.js"
+    "static/css/main.a3d37781.css",
+    "static/js/main.f306ff96.js"
   ]
 }
