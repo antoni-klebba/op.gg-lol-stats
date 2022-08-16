@@ -10,9 +10,18 @@ export const calculateStats = function (
   setErrorMsg,
   setshowStats,
   setInstructionHighlight,
-  whichGames
+  whichGames,
+  radioChange
 ) {
-  let data = null;
+  let data = gamesData;
+
+  if (data.match(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g)) {
+    data = data.split(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g);
+    data.shift();
+    data.pop();
+    data = data.join("");
+  }
+
   if (whichGames === "all-games") {
     data = gamesData;
   } else if (whichGames === "victories") {
@@ -27,12 +36,7 @@ export const calculateStats = function (
       .join("");
   }
 
-  if (data.match(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g)) {
-    data = data.split(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g);
-    data.shift();
-    data.pop();
-    data = data.join("");
-  }
+  console.log(data);
 
   killsArr.length = 0;
   deathsArr.length = 0;
@@ -192,15 +196,16 @@ export const calculateStats = function (
       shortestGame: calculateTime(arrOfTime).shortestGame,
       longestGame: calculateTime(arrOfTime).longestGame,
     });
-
-  setshowStats({
-    showAnyStats: true,
-    showGeneral: true,
-    showKDA: false,
-    showRecords: false,
-    showMVP: false,
-    showTime: false,
-  });
+  if (!radioChange) {
+    setshowStats({
+      showAnyStats: true,
+      showGeneral: true,
+      showKDA: false,
+      showRecords: false,
+      showMVP: false,
+      showTime: false,
+    });
+  }
 
   setIsError(false);
   setInstructionHighlight(false);

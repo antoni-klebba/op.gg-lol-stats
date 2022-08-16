@@ -105,6 +105,7 @@ function App() {
 
   useEffect(() => {
     if (showStats.showAnyStats) {
+      const radioChange = true;
       calculateStats(
         value,
         setstats,
@@ -112,7 +113,8 @@ function App() {
         setErrorMsg,
         setshowStats,
         setInstructionHighlight,
-        whichGames
+        whichGames,
+        radioChange
       );
     }
   }, [whichGames]);
@@ -158,8 +160,6 @@ function App() {
     }
   };
 
-  console.log(whichGames);
-
   return (
     <div className={`app random-background-${wallpaper}`}>
       <div id="show-instruction-container">
@@ -176,7 +176,7 @@ function App() {
       <div className="content">
         <h1>OP.GG Stats Calculator</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="data">Paste your games:</label>
+          <label htmlFor="data">Paste games:</label>
           <textarea value={value} onChange={handleChange} spellCheck="false" resize="false" />
 
           <div className="radio-container">
