@@ -27,6 +27,13 @@ export const calculateStats = function (
       .join("");
   }
 
+  if (data.match(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g)) {
+    data = data.split(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g);
+    data.shift();
+    data.pop();
+    data = data.join("");
+  }
+
   killsArr.length = 0;
   deathsArr.length = 0;
   assistsArr.length = 0;
@@ -103,7 +110,6 @@ export const calculateStats = function (
   const numOfDefeats = data.match(/Defeat/g) ? data.match(/Defeat/g).length : 0;
   const numOfRemakes = data.match(/Remake/g) ? data.match(/Remake/g).length : 0;
   const numOfGames = numOfVictories + numOfDefeats;
-  console.log(numOfGames);
 
   // Win ratio
   const winratio = ((numOfVictories / (numOfDefeats + numOfVictories)) * 100).toFixed(2);
