@@ -18,14 +18,10 @@ export const calculateStats = function (
 
   if (data.match(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g)) {
     data = data.split(/Preferred Position \(Rank\)|OP.GG\nOP.GG/g);
-    data.shift();
-    data.pop();
-    data = data.join("");
+    data = data.slice(1, 2)[0];
   }
-
-  if (whichGames === "all-games") {
-    data = gamesData;
-  } else if (whichGames === "victories") {
+  // trzeba to zmienic
+  if (whichGames === "victories") {
     data = gamesData
       .split(/ago\n/g)
       .filter((item) => item.match("Victory\n"))

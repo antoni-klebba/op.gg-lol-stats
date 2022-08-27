@@ -16,8 +16,6 @@ import MVPStats from "./Components/MVPStats/MVPStats";
 import TimeStats from "./Components/TimeStats/TimeStats";
 import ErrorMsg from "./Components/ErrorMsg/ErrorMsg";
 
-// TODO - Redo validation
-
 function App() {
   const convertToBoolean = (str) => {
     if (str === "true") return true;
