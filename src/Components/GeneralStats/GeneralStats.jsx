@@ -11,6 +11,9 @@ const GeneralStats = ({ props }) => {
         <StatsTitle props={{ whichGames, statsSection }} />
         <ul>
           <li>
+            Total games: <span>{games}</span>
+          </li>
+          <li>
             Victories: <span>{victories}</span>
           </li>
           <li>
@@ -21,9 +24,6 @@ const GeneralStats = ({ props }) => {
               Remakes: <span>{remakes}</span>
             </li>
           )}
-          <li>
-            Total games: <span>{games}</span>
-          </li>
           {whichGames === "all-games" && (
             <li>
               Win rate: <span>{winratio} %</span>
