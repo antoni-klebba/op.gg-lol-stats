@@ -33,8 +33,6 @@ export const calculateStats = function (
       .join("");
   }
 
-  console.log(data);
-
   killsArr.length = 0;
   deathsArr.length = 0;
   assistsArr.length = 0;
@@ -161,23 +159,24 @@ export const calculateStats = function (
   const numOfMvpOrAce = data.match(/\nMVP\n|\nACE\n/g) ? data.match(/\nMVP\n|\nACE\n/g).length : 0;
   const percentOfMvpOrAce = ((numOfMvpOrAce / numOfGames) * 100).toFixed(2);
 
+  // Time
+  const arrOfTime = data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g);
+
+  calculateTime(arrOfTime);
+
   // CS
   const creepScoreArr = data.match(/CS (\d\d\d\d|\d\d\d|\d\d|\d)/g).map((item) => item.slice(3));
   const creepScore = (
     creepScoreArr.reduce((a, b) => Number(a) + Number(b)) / Number(numOfGames)
   ).toFixed(1);
 
-  const CSPerMinuteArr = data
-    .match(/(\(\d.\d\))|\(\d\)/g)
-    .map((item) => item.slice(1, item.length - 1));
+  const avgTime = calculateTime(arrOfTime).avgMinutes + calculateTime(arrOfTime).avgSeconds / 60;
+
   const CSPerMinute = (
-    CSPerMinuteArr.reduce((a, b) => Number(a) + Number(b)) / Number(numOfGames)
+    creepScoreArr.reduce((a, b) => Number(a) + Number(b)) /
+    Number(numOfGames) /
+    avgTime
   ).toFixed(1);
-
-  // Time
-  const arrOfTime = data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g);
-
-  calculateTime(arrOfTime);
 
   // setState
   if (whichGames)
@@ -267,6 +266,8 @@ const calculateTime = (arrOfTime) => {
     avgTime: `${avgMinutes}m : ${avgSeconds < 10 ? `0${avgSeconds}` : avgSeconds}s`,
     shortestGame: shortestGame(arrOfTime, minutesArr, secondsArr),
     longestGame: longestGame(arrOfTime, minutesArr, secondsArr),
+    avgMinutes,
+    avgSeconds,
   };
 };
 
