@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 
 import "./App.scss";
 
-import { gamesData } from "./Data/data.js";
-import { testData } from "./Data/testdata.js";
-
 import { calculateStats } from "./calculateStats.js";
 
 import Instruction from "./Components/Instruction/Instruction";
