@@ -160,7 +160,7 @@ export const calculateStats = function (
   const percentOfMvpOrAce = ((numOfMvpOrAce / numOfGames) * 100).toFixed(2);
 
   // Time
-  const arrOfTime = data.match(/(\d{2})m (\d{2}|\d)s|[4-9]m (\d{2}|\d)s/g);
+  const arrOfTime = data.match(/(\d{2})m (\d{2}|\d)s|[5-9]m (\d{2}|\d)s/g);
 
   calculateTime(arrOfTime);
 
@@ -290,29 +290,16 @@ const longestGame = (arrOfTime, minutesArr, secondsArr) => {
 };
 
 const shortestGame = (arrOfTime, minutesArr, secondsArr) => {
-  const lowestMin = minutesArr.sort((a, b) => a - b)[0];
+  const lowestMin = minutesArr[0];
   const lowestSecArr = [];
 
   for (let i = 0; i < arrOfTime.length; i++) {
-    if (Number(arrOfTime[i].split("m")[0]) == lowestMin) {
+    if (Number(arrOfTime[i].slice(0, 2)) == lowestMin) {
       lowestSecArr.push(secondsArr[i]);
     } else break;
   }
 
-  arrOfTime.forEach((time) => {
-    if (Number(time.split("m")[0]) == lowestMin) {
-      lowestSecArr.push(time);
-    }
-  });
+  const lowestSec = lowestSecArr.sort((a, b) => a - b)[0];
 
-  lowestSecArr.sort(
-    (a, b) => Number(a.split(" ")[1].slice(0, -1)) - Number(b.split(" ")[1].slice(0, -1))
-  );
-
-  const lowestSec =
-    lowestSecArr[0].split(" ")[1].length === 2
-      ? `0${lowestSecArr[0].split(" ")[1]}`
-      : lowestSecArr[0].split(" ")[1];
-
-  return `${lowestMin}m : ${lowestSec}`;
+  return `${lowestMin}m : ${lowestSec < 10 ? `0${lowestSec}` : lowestSec}s`;
 };
